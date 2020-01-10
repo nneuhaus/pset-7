@@ -43,7 +43,7 @@ function endsMeet(values, n) {
 };
 
 function difference(numbers) {
-  // write your code here
+//helphelphelpim=llvry
 }
 
 function max(number) {
