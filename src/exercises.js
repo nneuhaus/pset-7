@@ -13,22 +13,32 @@ function commonEnd(a, b) {
       return true;
     } else {
       return false;
-  }
+  };
 
-}
-}
+};
+};
 
 function endsMeet(values, n) {
-  if (!values || values.length === 0 || values <= 0) {
-    return [];
-  }
-  else {
-  const firstValues = values[0];
-  const lastValues = values[values.length-1];
+  let array = [];
 
-  if (values>=1) {
-    let newArray = [firstValues, lastValues];
+  if (!values || values.length < n || !Number.isInteger(n) || n < 0 ) { //1
+    return array;
+  } else {
+    if (n === 0) {
+      return values;
+    } else {
+    for (let i = 0; i < n; i++) {
+      if (values[i] !== undefined) {
+        array.push(values[i]);
+      };
+    };
+  for (let i = n; i> 0; i--) {
+    if (values[values.length -i] !== undefined) {
+      array.push(values[values.length - i]);
+    };
   };
+  return array;
+};
 };
 };
 
