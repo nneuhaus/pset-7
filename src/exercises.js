@@ -2,13 +2,35 @@ function commonEnd(a, b) {
   if (!a || a.length === 0 || !b || b.length === 0) {
     return false;
   }
+  else {
+    const firstValA = a[0];
+    const firstValB = b[0];
 
-  // write your code here
+    const lastValA =  a[a.length - 1];
+    const lastValB = b[b.length - 1];
+
+    if (firstValA == firstValB || lastValA == lastValB) {
+      return true;
+    } else {
+      return false;
+  }
+
+}
 }
 
 function endsMeet(values, n) {
-  // write your code here
-}
+  if (!values || values.length === 0 || values <= 0) {
+    return [];
+  }
+  else {
+  const firstValues = values[0];
+  const lastValues = values[values.length-1];
+
+  if (values>=1) {
+    let newArray = [firstValues, lastValues];
+  };
+};
+};
 
 function difference(numbers) {
   // write your code here
