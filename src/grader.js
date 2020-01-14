@@ -63,7 +63,7 @@ switch (fn) {
  * Tests the commonEnd function.
  */
 
-function testCommonEnd() {  
+function testCommonEnd() {
   const { parameters } = tests.exercises.find((exercise) => {
     return exercise.name === "commonEnd";
   });
@@ -359,7 +359,7 @@ function testClumps() {
 
 /**
  * Determines the equality of two arrays.
- * 
+ *
  * @param {*} expected the expected array.
  * @param {*} actual  the actual array.
  * @return true if both arrays are equal, otherwise false.
@@ -367,6 +367,8 @@ function testClumps() {
 
 function isEqual(expected, actual) {
   if (!expected && !actual) {
+    return true;
+  } else if (expected && !actual || !expected && actual) {
     return true;
   } else if (expected && !actual || !expected && actual) {
     return false;
