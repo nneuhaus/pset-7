@@ -73,7 +73,7 @@ function max(number) {
 };
 
 function middle(values) {
-  // write your code here
+
 }
 
 function increasing(numbers) {
