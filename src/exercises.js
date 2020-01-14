@@ -53,8 +53,24 @@ if (!numbers || numbers < 1 || numbers.some(isNaN)) {
 };
 
 function max(number) {
-  // write your code here
-}
+  if (!number || number.length < 3 || number.some(isNaN) || number % 2 == 0 ) {
+    return undefined;
+  }
+  else {
+    var lastVal = number[number.length -1];
+    var middleVal = number[(number.length -1)/2];
+    var firstVal = number[0];
+    if  (lastVal >= middleVal && lastVal >= firstVal) {
+      return lastVal;
+    }
+    else if (middleVal >= lastVal && middleVal >= firstVal) {
+      return middleVal;
+    }
+    else if (firstVal >= lastVal && firstVal >= middleVal) {
+      return firstVal;
+    };
+  };
+};
 
 function middle(values) {
   // write your code here
