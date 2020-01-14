@@ -42,8 +42,15 @@ function endsMeet(values, n) {
 }
 
 function difference(numbers) {
-//write code here
-}
+if (!numbers || numbers < 1 || numbers.some(isNaN)) {
+  return undefined;
+} else {
+    let largest = Number(Math.max.apply(null, numbers));
+    let smallest = Number(Math.min.apply(null, numbers));
+    let difference = largest - smallest;
+       return difference;
+  };
+};
 
 function max(number) {
   // write your code here
