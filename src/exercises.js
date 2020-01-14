@@ -20,27 +20,26 @@ function commonEnd(a, b) {
 
 function endsMeet(values, n) {
   let array = [];
-
-  if (!values || values.length < n || !Number.isInteger(n) || n < 0 ) { //1
+  if (!values || values.length < n || !Number.isInteger(n) || n < 0) {
     return array;
   } else {
     if (n === 0) {
       return values;
     } else {
-    for (let i = 0; i < n; i++) {
-      if (values[i] !== undefined) {
-        array.push(values[i]);
-      };
-    };
-  for (let i = n; i> 0; i--) {
-    if (values[values.length -i] !== undefined) {
-      array.push(values[values.length - i]);
-    };
-  };
-  return array;
-};
-};
-};
+      for (let i = 0; i < n; i++) {
+        if (values[i] !== undefined) {
+          array.push(values[i]);
+        }
+      }
+      for (let i = n; i > 0; i--) {
+        if (values[values.length - i] !== undefined) {
+          array.push(values[values.length - i]);
+        }
+      }
+      return array;
+    }
+  }
+}
 
 function difference(numbers) {
 //write code here
