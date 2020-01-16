@@ -73,12 +73,25 @@ function max(number) {
 };
 
 function middle(values) {
-
+  let array = [];
+if (values == undefined || values.length < 3 || values.length % 2 == 0 || values == undefined) {
+  return [];
+} else {
+  let middle2 = values [(values.length - (Math.ceil(values.length / 2)))];
+  let middle3 = values [(values.length -1) - (Math.ceil(values.length / 2))];
+  array.push(middle3 , middle2)
+  return array;
 }
+};
 
 function increasing(numbers) {
-  // write your code here
+/*if (numbers == undefined || numbers.length < 3 || numbers.some(isNaN) || !Numbers.isInteger(n)) {
+  return false;
+} else {
+  var
+} */
 }
+
 
 function everywhere(values, x) {
   // write your code here
