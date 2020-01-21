@@ -1,423 +1,220 @@
-const staff = require("./staff");
-const student = require("./exercises");
-const tests = require("../config/tests.json");
-const fn = process.argv[2];
-
-/*
- * Parse requested function to test.
- */
-
-switch (fn) {
-  case "all":
-    testCommonEnd();
-    testEndsMeet();
-    testDifference();
-    testMax();
-    testMiddle();
-    testIncreasing();
-    testEverywhere();
-    testConsecutive();
-    testBalance();
-    testClumps();
-    break;
-  case "commonEnd":
-    testCommonEnd();
-    break;
-  case "endsMeet":
-    testEndsMeet();
-    break;
-  case "difference":
-    testDifference();
-    break;
-  case "max":
-    testMax();
-    break;
-  case "middle":
-    testMiddle();
-    break;
-  case "increasing":
-    testIncreasing();
-    break;
-  case "everywhere":
-    testEverywhere();
-    break;
-  case "consecutive":
-    testConsecutive();
-    break;
-  case "balance":
-    testBalance();
-    break;
-  case "clumps":
-    testClumps();
-    break;
-  default:
-    console.log(`Unrecognized exercise: ${fn}.\n`);
-    console.log("Available exercises:");
-
-    for (const exercise in staff) {
-      console.log(`  - ${exercise}`);
-    }
-}
-
-/**
- * Tests the commonEnd function.
- */
-
-function testCommonEnd() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "commonEnd";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (let a of parameters[0].values) {
-    for (let b of parameters[1].values) {
-      const functionCall = `commonEnd(${format(a)}, ${format(b)})`;
-      const expected = staff.commonEnd(a, b);
-      const actual = student.commonEnd(a, b);
-
-      if (expected !== actual) {
-        console.log(`Test Case ${tc + 1} -- Fail.`);
-        console.log(`  - call: ${functionCall}`);
-        console.log(`  - expected: ${expected}`);
-        console.log(`  - actual: ${actual}\n`);
-      } else {
-        pass++;
-      }
-
-      tc++;
-    }
-  }
-  console.log(`commonEnd -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the endsMeet function.
- */
-
-function testEndsMeet() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "endsMeet";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const values of parameters[0].values) {
-    for (const n of parameters[1].values) {
-      const functionCall = `endsMeet(${format(values)}, ${n})`;
-      const expected = staff.endsMeet(values, n);
-      const actual = student.endsMeet(values, n);
-
-      if (!isEqual(expected, actual)) {
-        console.log(`Test Case ${tc + 1} -- Fail.`);
-        console.log(`  - call: ${functionCall}`);
-        console.log(`  - expected: ${format(expected)}`);
-        console.log(`  - actual: ${format(actual)}\n`);
-      } else {
-        pass++;
-      }
-
-      tc++;
-    }
-  }
-  console.log(`endsMeet -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the difference function.
- */
-
-function testDifference() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "difference";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const numbers of parameters[0].values) {
-    const functionCall = `difference(${format(numbers)})`;
-    const expected = staff.difference(numbers);
-    const actual = student.difference(numbers);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`difference -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the max function.
- */
-
-function testMax() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "max";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const numbers of parameters[0].values) {
-    const functionCall = `max(${format(numbers)})`;
-    const expected = staff.max(numbers);
-    const actual = student.max(numbers);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`max -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the middle function.
- */
-
-function testMiddle() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "middle";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const values of parameters[0].values) {
-    const functionCall = `middle(${format(values)})`;
-    const expected = staff.middle(values);
-    const actual = student.middle(values);
-
-    if (!isEqual(expected, actual)) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${format(expected)}`);
-      console.log(`  - actual: ${format(actual)}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`middle -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the increasing function.
- */
-
-function testIncreasing() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "increasing";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const numbers of parameters[0].values) {
-    const functionCall = `increasing(${format(numbers)})`;
-    const expected = staff.increasing(numbers);
-    const actual = student.increasing(numbers);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`increasing -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the everywhere function.
- */
-
-function testEverywhere() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "everywhere";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const values of parameters[0].values) {
-    for (const x of parameters[1].values) {
-      const functionCall = `everywhere(${format(values)}, ${x})`;
-      const expected = staff.everywhere(values, x);
-      const actual = student.everywhere(values, x);
-
-      if (expected !== actual) {
-        console.log(`Test Case ${tc + 1} -- Fail.`);
-        console.log(`  - call: ${functionCall}`);
-        console.log(`  - expected: ${expected}`);
-        console.log(`  - actual: ${actual}\n`);
-      } else {
-        pass++;
-      }
-
-      tc++;
-    }
-  }
-  console.log(`everywhere -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the consecutive function.
- */
-
-function testConsecutive() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "consecutive";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const numbers of parameters[0].values) {
-    const functionCall = `consecutive(${format(numbers)})`;
-    const expected = staff.consecutive(numbers);
-    const actual = student.consecutive(numbers);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`consecutive -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the balance function.
- */
-
-function testBalance() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "balance";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const numbers of parameters[0].values) {
-    const functionCall = `balance(${format(numbers)})`;
-    const expected = staff.balance(numbers);
-    const actual = student.balance(numbers);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`balance -- passed ${pass} out of ${tc} test cases.`);
-}
-
-/**
- * Tests the clumps function.
- */
-
-function testClumps() {
-  const { parameters } = tests.exercises.find((exercise) => {
-    return exercise.name === "clumps";
-  });
-
-  let tc = 0;
-  let pass = 0;
-  for (const values of parameters[0].values) {
-    const functionCall = `clumps(${format(values)})`;
-    const expected = staff.clumps(values);
-    const actual = student.clumps(values);
-
-    if (expected !== actual) {
-      console.log(`Test Case ${tc + 1} -- Fail.`);
-      console.log(`  - call: ${functionCall}`);
-      console.log(`  - expected: ${expected}`);
-      console.log(`  - actual: ${actual}\n`);
-    } else {
-      pass++;
-    }
-
-    tc++;
-  }
-  console.log(`clumps -- passed ${pass} out of ${tc} test cases.`);
-}
-
-///////////////////// HELPER FUNCTIONS /////////////////////////////////////////////////
-
-/**
- * Determines the equality of two arrays.
- *
- * @param {*} expected the expected array.
- * @param {*} actual  the actual array.
- * @return true if both arrays are equal, otherwise false.
- */
-
-function isEqual(expected, actual) {
-  if (!expected && !actual) {
-    return true;
-  } else if ((expected && !actual) || (!expected && actual)) {
-    return false;
-  } else if (expected.length !== actual.length) {
+function commonEnd(a, b) {
+  if (!a || a.length === 0 || !b || b.length === 0) {
     return false;
   }
+  else {
+    const firstValA = a[0];
+    const firstValB = b[0];
 
-  for (let i = 0; i < expected.length; i++) {
-    if (expected[i] !== actual[i]) {
+    const lastValA =  a[a.length - 1];
+    const lastValB = b[b.length - 1];
+
+    if (firstValA == firstValB || lastValA == lastValB) {
+      return true;
+    } else {
+      return false;
+  };
+
+};
+};
+
+function endsMeet(values, n) {
+  let array1 = [];
+  let array2 = [];
+  if (!values || values.length < n || n < 1 || !Number.isInteger(n)) {
+    return [];
+  }
+  else {
+      array1 = values.slice(0, n);
+      array2 = values.slice(values.length - n, values.length + 1);
+      newArray = array1.concat(array2);
+      return newArray;
+  }
+}
+
+function difference(numbers) {
+if (!numbers || numbers < 1 || numbers.some(isNaN)) {
+  return undefined;
+} else {
+    let largest = Number(Math.max.apply(null, numbers));
+    let smallest = Number(Math.min.apply(null, numbers));
+    let difference = largest - smallest;
+       return difference;
+  };
+};
+
+function max(number) {
+  if (!number || number.length < 3 || number.some(isNaN) || number % 2 == 0 ) {
+    return undefined;
+  } else {
+    var lastVal = number[number.length -1];
+    var middleVal = number[(number.length -1)/2];
+    var firstVal = number[0];
+    if  (lastVal >= middleVal && lastVal >= firstVal) {
+      return lastVal;
+    }
+    else if (middleVal >= lastVal && middleVal >= firstVal) {
+      return middleVal;
+    }
+    else if (firstVal >= lastVal && firstVal >= middleVal) {
+      return firstVal;
+    };
+  };
+};
+
+function middle(values) {
+  let newArray = [];
+  if (!values || values.length < 3 || values.length % 2 === 0) {
+    return [];
+  }
+  else {
+    middleMiddle = values[(values.length - 1) / 2];
+    firstMiddle = values[((values.length - 1) / 2) - 1];
+    lastMiddle = values[((values.length - 1) / 2) + 1];
+
+    newArray.push(firstMiddle, middleMiddle, lastMiddle);
+
+    return newArray;
+  }
+
+
+}
+
+function increasing(numbers) {
+  let flag = 0;
+  if (!numbers || numbers.length < 3 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+    return false;
+  }
+  else {
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] < numbers[i + 1] && numbers[i + 1] < numbers[i + 2]) {
+          flag = 1;
+          return true;
+        }
+      }
+      if (flag === 0) {
+        return false;
+      }
+    }
+  }
+  function everywhere(values, x) {
+    let flag = 1;
+    if (!values || values.length < 1 || x === undefined) {
       return false;
     }
+    else {
+
+      for (let i = 0; i < values.length - 1; i++) {
+        if (values[i] === x) {
+          flag = 0;
+        }
+        else if (values[i - 1] === x || values[i + 1] === x) {
+          flag = 0;
+        }
+        else {
+          flag = 1;
+          return false;
+        }
+      }
+    }
+    if (flag === 0) {
+      return true;
+    }
+
   }
 
-  return true;
-}
+  function consecutive(numbers) {
+    let flag = 0;
+    if (!numbers || numbers.length < 3 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+      return false;
+    }
+    else {
 
-/**
- * Formats an array parameter for printing.
- *
- * @param {*} arr the array to be formatted.
- * @return the print-formatted array.
- */
+      for (let i = 0; i < numbers.length - 1; i++) {
+        if (numbers[i] % 2 === 0 && numbers[i + 1] % 2 === 0 && numbers[i + 2] % 2 === 0) {
+          flag = 1;
+          break;
+        }
+        else if (numbers[i] % 2 !== 0 && numbers[i + 1] % 2 !== 0 && numbers[i + 2] % 2 !== 0) {
+          flag = 1;
+          break;
+        }
+        else {
 
-function format(arr) {
-  if (!arr) {
-    return undefined;
-  }
-
-  let formatted = "";
-  for (let i = 0; i < arr.length; i++) {
-    if (typeof arr[i] === "string") {
-      formatted = formatted + (i === arr.length - 1 ? `\"${arr[i]}\"` : `\"${arr[i]}\", `);
-    } else if (typeof arr[i] === "number") {
-      formatted = formatted + (i === arr.length - 1 ? `${arr[i]}` : `${arr[i]}, `);
-    } else if (typeof arr[i] === "undefined") {
-      formatted = formatted + (i === arr.length - 1 ? "undefined" : "undefined, ");
-    } else {
-      console.log(">>>>>>>>>>>>>>>>>>>>> " + arr[i]);
-      console.log(">>>>>>>>>>>>>>>>>>>>> " + typeof arr[i]);
+        }
+      }
+      if (flag === 1) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
   }
 
-  return `[${formatted}]`;
-}
+  function balance(numbers) {
+    if (!numbers || numbers.length < 2 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+      return false;
+    }
+    else {
+      let flag = 0;
+
+      for (let i = 0; i < numbers.length; i++) {
+        splitLeft = i;
+        splitRight = i + 1;
+        let sumLeft = 0;
+        let sumRight = 0;
+        for (let j = 0; j <= splitLeft; j++) {
+          sumLeft = sumLeft + numbers[j];
+
+        }
+        for (let k = i + 1; k <= numbers.length - 1; k++) {
+          sumRight = sumRight + numbers[k];
+
+        }
+        if (sumLeft === sumRight) {
+          flag = 1;
+          return true;
+        }
+      }
+      if (flag !== 1) {
+        return false;
+      }
+    }
+    console.log("test");
+  }
+
+  function clumps(values) {
+    let clumpCount = 0;
+    if (!values) {
+      return -1;
+    }
+    else {
+       for (let i = 0; i < values.length - 1; i++) {
+        if (values[i - 1] === values[i]) {
+
+        }
+        else if (values[i] === values[i + 1]) {
+          clumpCount++;
+        }
+      }
+      return clumpCount;
+    }
+  }
+
+  /*
+   * Exports all functions for use in external grader.js file. Do not modify.
+   */
+
+  module.exports = {
+    commonEnd,
+    endsMeet,
+    difference,
+    max,
+    middle,
+    increasing,
+    everywhere,
+    consecutive,
+    balance,
+    clumps
+};
