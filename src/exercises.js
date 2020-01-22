@@ -19,25 +19,16 @@ function commonEnd(a, b) {
 };
 
 function endsMeet(values, n) {
-  let array = [];
-  if (!values || values.length < n || !Number.isInteger(n) || n < 0) {
-    return array;
-  } else {
-    if (n === 0) {
-      return values;
-    } else {
-      for (let i = 0; i < n; i++) {
-        if (values[i] !== undefined) {
-          array.push(values[i]);
-        }
-      }
-      for (let i = n; i > 0; i--) {
-        if (values[values.length - i] !== undefined) {
-          array.push(values[values.length - i]);
-        }
-      }
-      return array;
-    }
+  let array1 = [];
+  let array2 = [];
+  if (!values || values.length < n || n < 1 || !Number.isInteger(n)) {
+    return [];
+  }
+  else {
+      array1 = values.slice(0, n);
+      array2 = values.slice(values.length - n, values.length + 1);
+      newArray = array1.concat(array2);
+      return newArray;
   }
 }
 
@@ -55,8 +46,7 @@ if (!numbers || numbers < 1 || numbers.some(isNaN)) {
 function max(number) {
   if (!number || number.length < 3 || number.some(isNaN) || number % 2 == 0 ) {
     return undefined;
-  }
-  else {
+  } else {
     var lastVal = number[number.length -1];
     var middleVal = number[(number.length -1)/2];
     var firstVal = number[0];
@@ -73,56 +63,158 @@ function max(number) {
 };
 
 function middle(values) {
-  let array = [];
-if (values == undefined || values.length < 3 || values.length % 2 == 0 || values == undefined) {
-  return [];
-} else {
-  let middle2 = values [(values.length - (Math.ceil(values.length / 2)))];
-  let middle3 = values [(values.length -1) - (Math.ceil(values.length / 2))];
-  array.push(middle3 , middle2)
-  return array;
+  let newArray = [];
+  if (!values || values.length < 3 || values.length % 2 === 0) {
+    return [];
+  }
+  else {
+    middleMiddle = values[(values.length - 1) / 2];
+    firstMiddle = values[((values.length - 1) / 2) - 1];
+    lastMiddle = values[((values.length - 1) / 2) + 1];
+
+    newArray.push(firstMiddle, middleMiddle, lastMiddle);
+
+    return newArray;
+  }
+
+
 }
-};
 
 function increasing(numbers) {
-/*if (numbers == undefined || numbers.length < 3 || numbers.some(isNaN) || !Numbers.isInteger(n)) {
-  return false;
-} else {
-  var
-} */
-}
+  let flag = 0;
+  if (!numbers || numbers.length < 3 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+    return false;
+  }
+  else {
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] < numbers[i + 1] && numbers[i + 1] < numbers[i + 2]) {
+          flag = 1;
+          return true;
+        }
+      }
+      if (flag === 0) {
+        return false;
+      }
+    }
+  }
+  function everywhere(values, x) {
+    let flag = 1;
+    if (!values || values.length < 1 || x === undefined) {
+      return false;
+    }
+    else {
 
+      for (let i = 0; i < values.length - 1; i++) {
+        if (values[i] === x) {
+          flag = 0;
+        }
+        else if (values[i - 1] === x || values[i + 1] === x) {
+          flag = 0;
+        }
+        else {
+          flag = 1;
+          return false;
+        }
+      }
+    }
+    if (flag === 0) {
+      return true;
+    }
 
-function everywhere(values, x) {
-  // write your code here
-}
+  }
 
-function consecutive(numbers) {
-  // write your code here
-}
+  function consecutive(numbers) {
+    let flag = 0;
+    if (!numbers || numbers.length < 3 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+      return false;
+    }
+    else {
 
-function balance(numbers) {
-  // write your code here
-  console.log("test");
-}
+      for (let i = 0; i < numbers.length - 1; i++) {
+        if (numbers[i] % 2 === 0 && numbers[i + 1] % 2 === 0 && numbers[i + 2] % 2 === 0) {
+          flag = 1;
+          break;
+        }
+        else if (numbers[i] % 2 !== 0 && numbers[i + 1] % 2 !== 0 && numbers[i + 2] % 2 !== 0) {
+          flag = 1;
+          break;
+        }
+        else {
 
-function clumps(values) {
-  // write your code here
-}
+        }
+      }
+      if (flag === 1) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  }
 
-/*
- * Exports all functions for use in external grader.js file. Do not modify.
- */
+  function balance(numbers) {
+    if (!numbers || numbers.length < 2 || numbers.some(isNaN) || numbers.some(Number.isInteger) === false) {
+      return false;
+    }
+    else {
+      let flag = 0;
 
-module.exports = {
-  commonEnd,
-  endsMeet,
-  difference,
-  max,
-  middle,
-  increasing,
-  everywhere,
-  consecutive,
-  balance,
-  clumps
+      for (let i = 0; i < numbers.length; i++) {
+        splitLeft = i;
+        splitRight = i + 1;
+        let sumLeft = 0;
+        let sumRight = 0;
+        for (let j = 0; j <= splitLeft; j++) {
+          sumLeft = sumLeft + numbers[j];
+
+        }
+        for (let k = i + 1; k <= numbers.length - 1; k++) {
+          sumRight = sumRight + numbers[k];
+
+        }
+        if (sumLeft === sumRight) {
+          flag = 1;
+          return true;
+        }
+      }
+      if (flag !== 1) {
+        return false;
+      }
+    }
+    console.log("test");
+  }
+
+  function clumps(values) {
+    let clumpCount = 0;
+    if (!values) {
+      return -1;
+    }
+    else {
+       for (let i = 0; i < values.length - 1; i++) {
+        if (values[i - 1] === values[i]) {
+
+        }
+        else if (values[i] === values[i + 1]) {
+          clumpCount++;
+        }
+      }
+      return clumpCount;
+    }
+  }
+
+  /*
+   * Exports all functions for use in external grader.js file. Do not modify.
+   */
+
+  module.exports = {
+    commonEnd,
+    endsMeet,
+    difference,
+    max,
+    middle,
+    increasing,
+    everywhere,
+    consecutive,
+    balance,
+    clumps
 };
